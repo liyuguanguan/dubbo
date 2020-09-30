@@ -34,9 +34,9 @@ import java.util.Map;
 import static org.apache.dubbo.common.constants.RegistryConstants.ENABLE_REGISTRY_DIRECTORY_AUTO_MIGRATION;
 import static org.apache.dubbo.common.constants.RegistryConstants.REGISTRY_KEY;
 import static org.apache.dubbo.common.constants.RegistryConstants.REGISTRY_PROTOCOL;
-import static org.apache.dubbo.registry.Constants.CONSUMER_PROTOCOL;
-import static org.apache.dubbo.registry.Constants.DEFAULT_REGISTRY;
-import static org.apache.dubbo.registry.Constants.REGISTER_IP_KEY;
+import static org.apache.dubbo.registry.Constants.*;
+//import static org.apache.dubbo.registry.Constants.CONSUMER_PROTOCOL;
+
 
 /**
  * RegistryProtocol
@@ -84,7 +84,7 @@ public class InterfaceCompatibleRegistryProtocol extends RegistryProtocol {
             serviceDiscoveryDirectory.setRegistry(registry);
             serviceDiscoveryDirectory.setProtocol(protocol);
             Map<String, String> parameters = new HashMap<String, String>(serviceDiscoveryDirectory.getConsumerUrl().getParameters());
-            URL urlToRegistry = new URL(CONSUMER_PROTOCOL, parameters.remove(REGISTER_IP_KEY), 0, type.getName(), parameters);
+            URL urlToRegistry = new URL(DEFAULT_REGISTRY, parameters.remove(REGISTER_IP_KEY), 0, type.getName(), parameters);
             if (serviceDiscoveryDirectory.isShouldRegister()) {
                 serviceDiscoveryDirectory.setRegisteredConsumerUrl(urlToRegistry);
                 registry.register(serviceDiscoveryDirectory.getRegisteredConsumerUrl());
